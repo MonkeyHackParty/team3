@@ -3,9 +3,12 @@ name: format
 # https://zenn.dev/arsaga/articles/bf20daf4b35ccc
 
 # プルリクエスト時に実行する
+# https://docs.github.com/ja/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#pull_request
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
+    paths:
+      - '*.py'
 
 jobs:
   format:
@@ -41,4 +44,4 @@ jobs:
       - name: Auto commit # 自動コミット
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: auto code format
+          commit_message: Auto code format
