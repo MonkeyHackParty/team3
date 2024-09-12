@@ -1,9 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
+# "ご飯中" -> "ご飯 (中)"
+def sanitize_name(s):
+    for i in ["中", "大", "小", "特大", "ミニ"]:
+        if s.endswith(i):
+            s = s.replace(i, f" ({i})")
+    return s
+
+# 単位を取り除く
 def sanitize_element(s):
     for i in ["円", "kcal", "mg", "μg", "g"]:
         s = s.replace(i, "")
+    return s
+
+# 全角カッコを半角カッコに置換
+def sanitize_place_of_origin(s):
+    s = s.replace("（", " (")
+    s = s.replace("）", ") ")
     return s
 
 def scrape_by_food_id(food_id, category):
@@ -18,10 +32,11 @@ def scrape_by_food_id(food_id, category):
     name_mixed = soup.select("div#main h1")[0].text
     name_english = soup.select("div#main h1 span")[0].text
     name = name_mixed.replace(name_english, "")
+    name = sanitize_name(name)
     # print(name)
     # print(name_english)
 
-    is_price = True
+    element_count = 1
     elements = ""
     values = soup.select("ul.detail > li")
     for v in values:
@@ -29,12 +44,16 @@ def scrape_by_food_id(food_id, category):
             element = v.find("span", class_="price").text
             element = sanitize_element(element)
 
-            # もし0番目(価格)で大中小の3つの値段がある場合、中の値段だけにする
-            if is_price and "中" in element:
+            # もし1番目(価格)で大中小の3つの値段がある場合、中の値段だけにする
+            if element_count == 1 and "中" in element:
                 element = element.split(" ")[0].replace("中", "")
 
+            # もし14番目(原産地)
+            if element_count == 14:
+                element = sanitize_place_of_origin(element)
+
             elements += element + ","
-            is_price = False
+            element_count += 1
         except Exception as e:
             break
     # Remove the last comma of elements
