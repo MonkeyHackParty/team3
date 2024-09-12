@@ -1,12 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 # "ご飯中" -> "ご飯 (中)"
 def sanitize_name(s):
     for i in ["中", "小", "特大", "大", "ミニ"]:
         if s.endswith(i):
             s = s.replace(i, f" ({i})")
     return s
+
 
 # 単位を取り除く
 def sanitize_element(s):
@@ -15,12 +17,14 @@ def sanitize_element(s):
             s = s.replace(i, "")
     return s
 
+
 # 全角カッコを半角カッコに置換
 def sanitize_place_of_origin(s):
     s = s.replace("（", " (")
     s = s.replace("）", ") ")
-    s = s[:-1] # 最後のスペースを削除
+    s = s[:-1]  # 最後のスペースを削除
     return s
+
 
 def scrape_by_food_id(food_id, category):
     category = category_to_string(category)
@@ -87,6 +91,7 @@ def scrape_by_food_id(food_id, category):
 
     return csv_str
 
+
 def category_to_string(category):
     if category == "on_a":
         return "main_dish"
@@ -100,6 +105,7 @@ def category_to_string(category):
         return "desert"
     elif category == "on_bunrui5":
         return "rice"
+
 
 # tパラメータ
 # カフェテリア(場所)の指定
@@ -143,7 +149,10 @@ for category in category_list:
 
 print(f"Found {len(food_list)} food_id!")
 
-csv_heading = "food_id,name,name_english,category,price,energy,protein,fat,carbohydrates,salt,calcium,vegetable,iron,vitamin_a,vitamin_b1,vitamin_b2,vitamin_c,place_of_origin,allergic_substance,rate_good,rate_normal,rate_bad,image" + "\n"
+csv_heading = (
+    "food_id,name,name_english,category,price,energy,protein,fat,carbohydrates,salt,calcium,vegetable,iron,vitamin_a,vitamin_b1,vitamin_b2,vitamin_c,place_of_origin,allergic_substance,rate_good,rate_normal,rate_bad,image"
+    + "\n"
+)
 csv_str = ""
 
 # food_listをもとにそれぞれの食べ物の詳細をスクレイピングする
@@ -155,7 +164,7 @@ for food in food_list:
 
     csv_str += scrape_by_food_id(food_id, category) + "\n"
 
-with open('foods.csv', mode='w') as f:
+with open("foods.csv", mode="w") as f:
     f.write(csv_heading)
     f.write(csv_str)
 
