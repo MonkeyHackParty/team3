@@ -117,7 +117,7 @@ for category in category_list:
         food_list.append([food_id, category])
 
 # print("food_id_list:", food_id_list)
-print(f"Found {len(food_list)} food_id...")
+print(f"Found {len(food_list)} food_id!")
 
 csv_str = ""
 
