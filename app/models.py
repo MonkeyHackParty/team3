@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, DateTime, BLOB
+from sqlalchemy import Column, Integer, Float, String, DateTime
 from config import base, engine
 
 # https://zenn.dev/re24_1986/articles/8520ac3f9a0187
@@ -52,4 +52,4 @@ class Foods(base):
     rate_good = Column("rate_good", Integer)
     rate_normal = Column("rate_normal", Integer)
     rate_bad = Column("rate_bad", Integer)
-    image = Column("image", BLOB)
+    image_url = Column("image_url", String(128))

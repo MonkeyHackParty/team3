@@ -1,7 +1,6 @@
 from config import session
 import app.models
 from app.models import Users, Meals, MealDetails, Foods
-import requests
 
 # テーブルの作成
 app.models.create_table()
@@ -45,11 +44,8 @@ with open('foods.csv', mode='r') as f:
 
         print(f"Adding food_id {food_id}...")
 
-        res= requests.get(image_url)
-        image = res.content
-
         # あー悲惨
-        food = Foods(food_id=food_id, name=name, name_english=name_english, category=category, price=price, energy=energy, protein=protein, fat=fat, carbohydrates=carbohydrates, salt=salt, calcium=calcium, vegetable=vegetable, iron=iron, vitamin_a=vitamin_a, vitamin_b1=vitamin_b1, vitamin_b2=vitamin_b2, vitamin_c=vitamin_c, place_of_origin=place_of_origin, allergic_substance=allergic_substance, rate_good=rate_good, rate_normal=rate_normal, rate_bad=rate_bad, image=image)
+        food = Foods(food_id=food_id, name=name, name_english=name_english, category=category, price=price, energy=energy, protein=protein, fat=fat, carbohydrates=carbohydrates, salt=salt, calcium=calcium, vegetable=vegetable, iron=iron, vitamin_a=vitamin_a, vitamin_b1=vitamin_b1, vitamin_b2=vitamin_b2, vitamin_c=vitamin_c, place_of_origin=place_of_origin, allergic_substance=allergic_substance, rate_good=rate_good, rate_normal=rate_normal, rate_bad=rate_bad, image_url=image_url)
 
         # TODO conflictしたら値を更新する
         try:
@@ -57,5 +53,6 @@ with open('foods.csv', mode='r') as f:
             session.commit()
         except Exception as e:
             print("Failed to add to database!")
+            print(e)
 
 session.close()
