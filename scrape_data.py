@@ -21,6 +21,7 @@ def scrape_by_food_id(food_id, category):
     # print(name)
     # print(name_english)
 
+    is_price = True
     elements = ""
     values = soup.select("ul.detail > li")
     for v in values:
@@ -28,7 +29,12 @@ def scrape_by_food_id(food_id, category):
             element = v.find("span", class_="price").text
             element = sanitize_element(element)
 
+            # もし0番目(価格)で大中小の3つの値段がある場合、中の値段だけにする
+            if is_price and "中" in element:
+                element = element.split(" ")[0].replace("中", "")
+
             elements += element + ","
+            is_price = False
         except Exception as e:
             break
     # Remove the last comma of elements
@@ -40,7 +46,7 @@ def scrape_by_food_id(food_id, category):
 
     for icon in icon_list:
         allergy = icon["class"][0].replace("icon_", "")
-        allergic_substance += allergy + ":"
+        allergic_substance += allergy + " "
 
     # Remove the last colon
     allergic_substance = allergic_substance[:-1]
@@ -119,6 +125,7 @@ for category in category_list:
 # print("food_id_list:", food_id_list)
 print(f"Found {len(food_list)} food_id!")
 
+csv_heading = "name,name_english,category,price,energy,protein,fat,carbohydrates,salt,calcium,vegetable,iron,vitamin_a,vitamin_b1,vitamin_b2,vitamin_c,place_of_origin,allergic_substance,rate_good,rate_normal,rate_bad,image" + "\n"
 csv_str = ""
 
 # food_id_listをもとにそれぞれの食べ物の詳細をスクレイピングする
@@ -131,6 +138,7 @@ for food in food_list:
     csv_str += scrape_by_food_id(food_id, category) + "\n"
 
 with open('foods.csv', mode='w') as f:
+    f.write(csv_heading)
     f.write(csv_str)
 
 print("Wrote food data to foods.csv!")
