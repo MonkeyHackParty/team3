@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, Float, String, DateTime, BLOB
 from config import base, engine
 
+# https://zenn.dev/re24_1986/articles/8520ac3f9a0187
+
 def create_table():
     base.metadata.create_all(bind=engine)
 
@@ -9,8 +11,8 @@ class Users(base):
 
     user_id = Column('user_id', Integer, primary_key=True)
     name = Column('name', String(128))
-    email = Column('email', String(128))
-    password = Column('password', String(128))
+    email = Column('email', String(64))
+    password = Column('password', String(64))
 
 class Meals(base):
     __tablename__ = "meals"
