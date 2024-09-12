@@ -1,4 +1,3 @@
-import sqlite3
 import requests
 from bs4 import BeautifulSoup
 
@@ -7,7 +6,9 @@ def sanitize_element(s):
         s = s.replace(i, "")
     return s
 
-def scrape_by_food_id(food_id):
+def scrape_by_food_id(food_id, category):
+    category = category_to_string(category)
+
     url = f"{BASE_URL}/detail.php?t={PLACE}&c={food_id}"
 
     res = requests.get(url)
@@ -55,9 +56,23 @@ def scrape_by_food_id(food_id):
     image_url = soup.select("img.menuimg")[0]["src"]
     # print(image_url)
 
-    csv_str = f"{name},{name_english},{elements},{allergic_substance},{rate_good},{rate_normal},{rate_bad},{image_url}"
+    csv_str = f"{name},{name_english},{category},{elements},{allergic_substance},{rate_good},{rate_normal},{rate_bad},{image_url}"
 
     return csv_str
+
+def category_to_string(category):
+    if category == "on_a":
+        return "main_dish"
+    elif category == "on_b":
+        return "sub_dish"
+    elif category == "on_c":
+        return "noodle"
+    elif category == "on_d":
+        return "bowl"
+    elif category == "on_e":
+        return "desert"
+    elif category == "on_bunrui5":
+        return "rice"
 
 # pip install requests
 # pip install beautifulsoup4
@@ -82,11 +97,12 @@ BASE_URL = "https://west2-univ.jp/sp"
 PLACE = 650337
 
 # カテゴリ別に食べ物IDをスクレイピングする
-food_id_list = []
+food_list = []
 category_list = ["on_a", "on_b", "on_c", "on_d", "on_e", "on_bunrui5"]
 
 print("Scraping food_id...")
 
+# TODO 並列処理にする
 for category in category_list:
     url = f"{BASE_URL}/menu_load.php?t={PLACE}&a={category}"
     # print(url)
@@ -98,20 +114,23 @@ for category in category_list:
 
     for food in foods:
         food_id = food.find("a")["href"].replace(f"detail.php?t={PLACE}&c=", "")
-        food_id_list.append(food_id)
+        food_list.append([food_id, category])
 
 # print("food_id_list:", food_id_list)
-print(f"Found {len(food_id_list)} food_id...")
+print(f"Found {len(food_list)} food_id...")
 
 csv_str = ""
 
 # food_id_listをもとにそれぞれの食べ物の詳細をスクレイピングする
-for food_id in food_id_list:
+for food in food_list:
+    food_id = food[0]
+    category = food[1]
+
     print(f"Scraping food_id {food_id}...")
 
-    csv_str += scrape_by_food_id(food_id) + "\n"
+    csv_str += scrape_by_food_id(food_id, category) + "\n"
 
 with open('foods.csv', mode='w') as f:
     f.write(csv_str)
 
-print("Wrote to foods.csv!")
+print("Wrote food data to foods.csv!")
