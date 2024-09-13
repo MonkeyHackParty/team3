@@ -8,3 +8,8 @@ from app.services import get_all_food, get_food_by_id
 def index():
     foods = get_all_food()
     return render_template("index.html", foods=foods)
+
+@app.route("/daily")
+def daily():
+    foods = get_all_food()
+    return render_template("daily.html", foods=foods)
