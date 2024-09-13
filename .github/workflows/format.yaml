@@ -1,4 +1,4 @@
-name: Format Python files
+name: format
 
 # https://zenn.dev/arsaga/articles/bf20daf4b35ccc
 
@@ -11,8 +11,8 @@ on:
       - '*.py'
 
 jobs:
-  python_format:
-    name: python_format
+  format:
+    name: format
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -35,10 +35,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install black isort
 
-      - name: Format with black # blackを使ってフォーマット
+      - name: black # blackを使ってフォーマット
         run: black .
 
-      - name: Format with isort # isortを使ってインポートを整理
+      - name: isort # isortを使ってインポートを整理
         run: isort .
 
       - name: Auto commit # 自動コミット
