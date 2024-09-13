@@ -2,19 +2,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
-DATABASE = 'sqlite:///data.sqlite'
+DATABASE = "sqlite:///data.sqlite"
 
 engine = create_engine(
     DATABASE,
     # TrueだとSQL文が出力される
-    echo = False
+    echo=False,
 )
 
-session = Session(
-    autocommit = False,
-    autoflush = True,
-    bind = engine
-)
+session = Session(autocommit=False, autoflush=True, bind=engine)
 
 base = declarative_base()
-#base.query = session.query_property()
+# base.query = session.query_property()

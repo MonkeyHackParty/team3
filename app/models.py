@@ -1,18 +1,22 @@
-from sqlalchemy import Column, Integer, Float, String, DateTime
+from sqlalchemy import Column, DateTime, Float, Integer, String
+
 from config import base, engine
 
 # https://zenn.dev/re24_1986/articles/8520ac3f9a0187
 
+
 def create_table():
     base.metadata.create_all(bind=engine)
 
-class Users(base):
-    __tablename__ = 'users'
 
-    user_id = Column('user_id', Integer, primary_key=True)
-    name = Column('name', String(128))
-    email = Column('email', String(64))
-    password = Column('password', String(64))
+class Users(base):
+    __tablename__ = "users"
+
+    user_id = Column("user_id", Integer, primary_key=True)
+    name = Column("name", String(128))
+    email = Column("email", String(64))
+    password = Column("password", String(64))
+
 
 class Meals(base):
     __tablename__ = "meals"
@@ -21,11 +25,13 @@ class Meals(base):
     user_id = Column("user_id", Integer)
     date = Column("date", DateTime)
 
+
 class MealDetails(base):
     __tablename__ = "meal_details"
 
     meal_id = Column("meal_id", Integer, primary_key=True)
     food_id = Column("food_id", Integer)
+
 
 class Foods(base):
     __tablename__ = "foods"
