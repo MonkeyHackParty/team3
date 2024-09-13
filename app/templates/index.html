@@ -1,4 +1,101 @@
 {% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
 {% block content %}
-<h1>Hello</h1>
+<header>
+    <h1>学メシアドバイザー</h1>
+  </header>
+  <aside>
+    <a href="">新規登録</a>
+    <a href="">ログイン</a>
+  </aside>
+  <article>
+    <form action="">
+        お値段はいくらぐらいですか？
+        <input type="radio" name="price" value="550円"> 550円
+        <input type="radio" name="price" value="550円"> 650円
+        <input type="radio" name="price" value="550円"> 750円
+    </form>
+    <form action="">
+        量はどのくらいですか？
+        <input type="radio" name="amount" value="小"> 小
+        <input type="radio" name="amount" value="中"> 中
+        <input type="radio" name="amount" value="大"> 大
+    </form>
+    <form action="">
+        デザートはどうしますか？(お値段が750円のときのみアリを選択できます)
+        <input type="radio" name="dessert" value="アリ"> アリ
+        <input type="radio" name="dessert" value="ナシ"> ナシ
+    </form>
+    <main>
+   <div class="container">
+      <div class="item">
+      <p> {{ name }} </p>
+      <p>メニュー名</p>
+      </div>
+      <div class="item">
+      <p>data </p>
+      <p>メニュー名</p>
+      </div>
+      <div class="item">
+      <p>data</p>
+      <p>メニュー名</p>
+      </div>
+   </div>
+     <ul>
+     <li>エネルギー:date</li> 
+     <li>タンパク質:date</li>
+     <li>脂質:date</li>
+     <li>炭水化物:date</li>
+     <li>ナトリウム:date</li>
+     </ul>
+     <div>
+     <P>合計金額:date円</P>
+     </div>
+    </main>
+  
+    <section>
+     <table border="1">
+        <tr>
+            <th>
+                date
+            </th>
+            <th>
+                date
+            </th>
+            <th>
+                date
+            </th>
+            <th>
+                date
+            </th>
+            <th>
+                date
+            </th>
+        </tr>
+        <tr>
+            <td>
+                data
+            </td>
+            <td>
+                data
+            </td>
+            <td>
+                data
+            </td>
+            <td>
+                data
+            </td>
+            <td>
+                data
+            </td>
+        </tr>
+     </table>
+    </section>
+   <div class="container1">
+    <div class="item1"><a href="">左</a></div>
+    <div  class="item1"><a href="">右</a></div>
+   </div>
+  </article>
 {% endblock %}
