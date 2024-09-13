@@ -1,5 +1,6 @@
-name: Format Python files
+name: Format code
 
+# GitHub Actions何も分からない :(
 # https://zenn.dev/arsaga/articles/bf20daf4b35ccc
 
 # プルリクエスト時に実行する
@@ -7,16 +8,15 @@ name: Format Python files
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths:
-      - '*.py'
 
 jobs:
-  python_format:
-    name: python_format
+  format:
+    name: format
     runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.10"]
+        node-version: ["20"]
     permissions:
       contents: write
     steps:
@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies # black、pipのインストール
+      - name: Install black and isort # black、pipのインストール
         run: |
           python -m pip install --upgrade pip
           pip install black isort
@@ -40,6 +40,18 @@ jobs:
 
       - name: Format with isort # isortを使ってインポートを整理
         run: isort .
+
+      - name: Set up Node.js ${{ matrix.node-version }} # Node.jsのセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install prettier # prettierのインストール
+        run: |
+          npm install -g prettier
+
+      - name: Format with prettier # prettierを使ってフォーマット
+        run: prettier --write '*.{html,css,js}'
 
       - name: Auto commit # 自動コミット
         uses: stefanzweifel/git-auto-commit-action@v5
