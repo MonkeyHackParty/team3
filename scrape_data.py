@@ -25,6 +25,7 @@ def sanitize_place_of_origin(s):
     s = s[:-1]  # 最後のスペースを削除
     return s
 
+
 def category_to_string(category):
     if category == "on_a":
         return "main_dish"
@@ -38,6 +39,7 @@ def category_to_string(category):
         return "dessert"
     elif category == "on_bunrui5":
         return "rice"
+
 
 def scrape_by_food_id(food_id, category):
     category = category_to_string(category)
@@ -103,7 +105,6 @@ def scrape_by_food_id(food_id, category):
     csv_str = f"{food_id},{name},{name_english},{category},{elements},{allergic_substance},{rate_good},{rate_normal},{rate_bad},{image_url}"
 
     return csv_str
-
 
 
 # tパラメータ
