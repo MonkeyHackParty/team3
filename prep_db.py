@@ -7,7 +7,7 @@ app.models.create_table()
 
 # foodsテーブルにfoods.csvからのデータをいれる
 is_first_line = True
-with open("foods.csv", mode="r") as f:
+with open("foods.csv", mode="r", encoding="utf-8") as f:
     for line in f:
         if is_first_line:
             is_first_line = False
