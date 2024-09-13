@@ -1,0 +1,45 @@
+name: Format Web files
+
+# https://zenn.dev/arsaga/articles/bf20daf4b35ccc
+
+# プルリクエスト時に実行する
+# https://docs.github.com/ja/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#pull_request
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '*.html'
+      - '*.css'
+      - '*.js'
+
+jobs:
+  web_format:
+    name: web_format
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node-version: ["20"]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository # リポジトリのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Node.js ${{ matrix.node-version }} # Node.jsのセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies # prettierのインストール
+        run: |
+          npm install -g prettier
+
+      - name: Format with prettier # prettierを使ってフォーマット
+        run: prettier --write '*.{html,css,js}'
+
+      - name: Auto commit # 自動コミット
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Auto code format
