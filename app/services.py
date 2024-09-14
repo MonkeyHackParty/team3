@@ -1,5 +1,6 @@
 from app.models import Foods, Users, MealDetails, Meals
 from config import session
+from app.utils import format_datetime
 import datetime
 
 
@@ -56,7 +57,7 @@ def get_history_by_user_id(user_id, is_recent = False):
 
         # TODO ここ読みづらい
         if meals.date != current_date:
-            food_list.append({"date": current_date, "meal_id": meals.meal_id, "foods": single_food_list})
+            food_list.append({"date": format_datetime(current_date), "meal_id": meals.meal_id, "foods": single_food_list})
             current_date = meals.date
             single_food_list = []
 
@@ -64,6 +65,6 @@ def get_history_by_user_id(user_id, is_recent = False):
 
         # もしiがitemsの最後なら
         if i == items[-1]:
-            food_list.append({"date": meals.date, "meal_id": meals.meal_id, "foods": single_food_list})
+            food_list.append({"date": format_datetime(current_date), "meal_id": meals.meal_id, "foods": single_food_list})
 
     return food_list
