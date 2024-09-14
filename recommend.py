@@ -244,7 +244,7 @@ recent_list = [
     {
         "date": "2024-09-10",
         "meal_id": 1,
-        "foods": [food_item]  # 他の食事データがあればここに追加
+        "foods": [food_item]
     }
 ]
 
@@ -265,6 +265,7 @@ for i in recent_list:
 
 print("main:", recent_main_dish_num, "bowl:",
       recent_bowl_num, "noodle:", recent_noodle_num)
+
 main_dish = random.randint(0, 4)
 if main_dish == 0:
     main_dish = "main_dish"
