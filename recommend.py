@@ -267,9 +267,9 @@ def recommend_menu(input_price, input_size, input_dessert):
 
     # 変数の代入（仮）
     # 質問
-    input_price = 550
-    input_size = 1  # (0=小,1=中,2=大)
-    input_dessert = True
+    # input_price = 550
+    # input_size = 1  # (0=小,1=中,2=大)
+    # input_dessert = True
 
     # デザートが最高額の時のみ選択できるようにする
     if input_price != 750:
@@ -311,6 +311,7 @@ def recommend_menu(input_price, input_size, input_dessert):
         print("選択メニュー数：", serect_food_num)
 
     # 記録（仮）
+    '''
     food_item = {
         "category": "main_dish",
         "name": "ライス",
@@ -337,19 +338,20 @@ def recommend_menu(input_price, input_size, input_dessert):
     }
 
     recent_list = [{"date": "2024-09-10", "meal_id": 1, "foods": [food_item]}]
-
+    '''
     # 主食の選択（主菜・麺・丼/カレー）＋記録参照
     # (本番では下のコメントアウトを消し、上"記録（仮）"を消すこと)
-    # recent_list = get_history_by_user_id(user_id, True)
+    recent_list = get_history_by_user_id(user_id, True)
 
-    for i in recent_list:
-        for j in i["foods"]:
-            if j["category"] == "main_dish":
-                recent_main_dish_num += 1
-            elif j["category"] == "bowl":
-                recent_bowl_num += 1
-            elif j["category"] == "noodle":
-                recent_noodle_num += 1
+    if recent_list is not None and len(recent_list) > 0:
+        for i in recent_list:
+            for j in i["foods"]:
+                if j["category"] == "main_dish":
+                    recent_main_dish_num += 1
+                elif j["category"] == "bowl":
+                    recent_bowl_num += 1
+                elif j["category"] == "noodle":
+                    recent_noodle_num += 1
 
     print(
         "main:",
@@ -471,13 +473,8 @@ def recommend_menu(input_price, input_size, input_dessert):
     return serect_food_list, toatal_food_data
 
 
+''''''
 if __name__ == "__main__":
     # 例
     list = recommend_menu(550, 2, True)  # listはfood_idを格納しているリスト
     print(list)
-    '''
-    serect_food_list = get_foods_by_ids(list)
-    print(serect_food_list)  # 渡すもの１（個別データ）
-    toatal_food_data = get_food_totals(serect_food_list)
-    print(toatal_food_data)  # 渡すもの２（合計データ）
-    '''
