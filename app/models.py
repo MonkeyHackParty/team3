@@ -12,7 +12,7 @@ def create_table():
 class Users(base):
     __tablename__ = "users"
 
-    user_id = Column("user_id", Integer, primary_key=True)
+    user_id = Column("user_id", Integer, primary_key=True, autoincrement=True)
     name = Column("name", String(128))
     email = Column("email", String(64))
     password = Column("password", String(64))
@@ -21,7 +21,7 @@ class Users(base):
 class Meals(base):
     __tablename__ = "meals"
 
-    meal_id = Column("meal_id", Integer, primary_key=True)
+    meal_id = Column("meal_id", Integer, primary_key=True, autoincrement=True)
     user_id = Column("user_id", Integer)
     date = Column("date", DateTime)
 
@@ -29,7 +29,10 @@ class Meals(base):
 class MealDetails(base):
     __tablename__ = "meal_details"
 
-    meal_id = Column("meal_id", Integer, primary_key=True)
+    meal_detail_id = Column(
+        "meal_detail_id", Integer, primary_key=True, autoincrement=True
+    )
+    meal_id = Column("meal_id", Integer)
     food_id = Column("food_id", Integer)
 
 
