@@ -12,34 +12,28 @@
   </aside>
   <article>
     <div class="container">
-     <div class="item">   
     <form action="recommend.py" method="post">
-        お値段はいくらぐらいですか？(値段は目安です)
+     <div class="item">   
+       <p> お値段はいくらぐらいですか？(値段は目安です)</p>
         <input type="radio" name="input_price" value="550"> 550円
         <input type="radio" name="input_price" value="650"> 650円
         <input type="radio" name="input_price" value="750"> 750円
-    </form>
     </div>
     <div class="item"> 
-    <form action="recommend.py" method="post">
-        量はどのくらいですか？
+       <p> 量はどのくらいですか？</p>
         <input type="radio" name="input_size" value="0"> 小
         <input type="radio" name="input_size" value="1"> 中
         <input type="radio" name="input_size" value="2"> 大
-    </form>
     </div>
-    <div class="item"> 
-    <form action="recommend.py" method="post">
-        デザートはどうしますか？(お値段が750円のときのみアリを選択できます)
+    <div class="item">
+       <p> デザートはどうしますか？(お値段が750円のときのみアリを選択できます)</p>
         <input type="radio" name="input_dessert" value="Ture"> アリ
         <input type="radio" name="input_dessert" value="False"> ナシ
-    </form>
     </div>
     <div class="item"> 
-    <form action="recommend.py" method="post">
         <input type="submit" value="送信する">
-    </form>
     </div>
+    </form>
     </div>
      {% for i in history %}
     <section>

@@ -26,7 +26,15 @@
      <li>炭水化物:{{ carbohydrates }}</li>
      <li>ナトリウム:{{ salt }}</li>
      </ul>
+     <p>金額:{{ price }}</p>
      <div>
+      <ul>
+        <li>合計エネルギー:{{ total_energy }}</li> 
+        <li>合計タンパク質:{{ total_protein }}</li>
+        <li>合計脂質: {{ total_fat }}</li>
+        <li>合計炭水化物:{{ total_carbohydrates }}</li>
+        <li>合計ナトリウム:{{ total_salt }}</li>
+        </ul>
      <P>合計金額:{{ total_price }}円</P>
      </div>
      {% endfor %}
