@@ -2,10 +2,11 @@ import math
 import random
 import sqlite3
 
+from flask import Flask, render_template
+
 from app.models import Foods
 from app.services import get_all_food, get_food_by_id, get_history_by_user_id
 from config import session
-from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -27,11 +28,10 @@ def recommend_menu(input_price, input_size, input_dessert):
                 "name": food.name,
                 "category": food.category,
                 "price": food.price,
-
                 "rate_good": food.rate_good,
                 "rate_normal": food.rate_normal,
                 "rate_bad": food.rate_bad,
-                "sum_rate": food.rate_good+food.rate_normal+food.rate_bad,
+                "sum_rate": food.rate_good + food.rate_normal + food.rate_bad,
             }
             # 辞書形式でリストに追加
             food_list.append(food_data)
@@ -53,10 +53,10 @@ def recommend_menu(input_price, input_size, input_dessert):
         """
         for food in all_foods_array:
             if food["food_id"] == target_food_id:
-                print(f"food_id: {food['food_id']}", end=' ')
-                print(f"Name: {food['name']}", end=' ')
-                print(f"Category: {food['category']}", end=' ')
-                print(f"Price: {food['price']}", end=' ')
+                print(f"food_id: {food['food_id']}", end=" ")
+                print(f"Name: {food['name']}", end=" ")
+                print(f"Category: {food['category']}", end=" ")
+                print(f"Price: {food['price']}", end=" ")
                 print(f"sum_rate: {food['sum_rate']}")
                 return  # 見つかった場合、他のアイテムを探す必要はないので、関数を終了します
         # 食品IDが見つからない場合のメッセージ
@@ -67,21 +67,22 @@ def recommend_menu(input_price, input_size, input_dessert):
         「rice」カテゴリーのライスをサイズで昇順にソートし、i番目に小さいライスを選択する関数
         """
         # 「rice」カテゴリーのライスをフィルタリング
-        rice_list = [
-            food for food in all_foods_array if food["category"] == "rice"]
+        rice_list = [food for food in all_foods_array if food["category"] == "rice"]
 
         # サイズ（価格）でソート
         sorted_rice_list = sorted(rice_list, key=lambda x: x["price"])
 
         # i番目に小さいライスを取得
         if len(sorted_rice_list) >= i:
-            i_smallest_rice = sorted_rice_list[i-1]
-            return i_smallest_rice['food_id']
+            i_smallest_rice = sorted_rice_list[i - 1]
+            return i_smallest_rice["food_id"]
         else:
             print(i, "番目に小さいライスが見つかりません。")
             return None
 
-    def select_sub_dish(all_foods_array, deside_food_data, sum_money, serect_food_num, input_price):
+    def select_sub_dish(
+        all_foods_array, deside_food_data, sum_money, serect_food_num, input_price
+    ):
         """
         副菜の選択を行い、合計金額と選択メニュー数を更新する関数
         """
@@ -89,8 +90,12 @@ def recommend_menu(input_price, input_size, input_dessert):
 
         # 副菜の個数を数える
         for i in range(len(all_foods_array)):
-            if (all_foods_array[i]["category"] == "sub_dish" and input_price >= sum_money + all_foods_array[i]["price"] and all_foods_array[i]["food_id"] not in deside_food_data):
-                if (all_foods_array[i]["sum_rate"] >= 50):
+            if (
+                all_foods_array[i]["category"] == "sub_dish"
+                and input_price >= sum_money + all_foods_array[i]["price"]
+                and all_foods_array[i]["food_id"] not in deside_food_data
+            ):
+                if all_foods_array[i]["sum_rate"] >= 50:
                     sub_dish_num += 1
                 sub_dish_num += 1
 
@@ -100,20 +105,26 @@ def recommend_menu(input_price, input_size, input_dessert):
             j = 0
             sub_dish_list = [0] * sub_dish_num
             for i in range(len(all_foods_array)):
-                if (all_foods_array[i]["category"] == "sub_dish" and input_price >= sum_money + all_foods_array[i]["price"] and all_foods_array[i]["food_id"] not in deside_food_data):
-                    if (all_foods_array[i]["sum_rate"] >= 50):
+                if (
+                    all_foods_array[i]["category"] == "sub_dish"
+                    and input_price >= sum_money + all_foods_array[i]["price"]
+                    and all_foods_array[i]["food_id"] not in deside_food_data
+                ):
+                    if all_foods_array[i]["sum_rate"] >= 50:
                         sub_dish_list[j] = all_foods_array[i]["food_id"]
                         j += 1
                     sub_dish_list[j] = all_foods_array[i]["food_id"]
                     j += 1
 
             # 副菜の選択
-            deside_food_data[serect_food_num] = sub_dish_list[random.randint(
-                0, len(sub_dish_list) - 1)]
+            deside_food_data[serect_food_num] = sub_dish_list[
+                random.randint(0, len(sub_dish_list) - 1)
+            ]
 
             # 価格の取得
             sub_dish_price = get_price_by_food_id(
-                all_foods_array, deside_food_data[serect_food_num])
+                all_foods_array, deside_food_data[serect_food_num]
+            )
 
             if sub_dish_price is not None:
                 sum_money += sub_dish_price
@@ -121,11 +132,13 @@ def recommend_menu(input_price, input_size, input_dessert):
                 serect_food_num += 1
 
                 get_food_details_by_id(
-                    all_foods_array, deside_food_data[serect_food_num - 1])
+                    all_foods_array, deside_food_data[serect_food_num - 1]
+                )
                 print("選択メニュー数：", serect_food_num)
             else:
                 print(
-                    f"Food ID {deside_food_data[serect_food_num]} の価格が見つかりませんでした。(select_sub_dish)")
+                    f"Food ID {deside_food_data[serect_food_num]} の価格が見つかりませんでした。(select_sub_dish)"
+                )
 
         return deside_food_data, sum_money, serect_food_num, sub_dish_num
 
@@ -134,6 +147,7 @@ def recommend_menu(input_price, input_size, input_dessert):
         all_foods_array リスト内で category が "bowl" の食品の price を任意倍し、
         1の位を0か5に切り上げて price を更新する関数
         """
+
         def round_price_to_nearest_5_or_0(price):
             """
             価格を5または0に切り上げる内部関数
@@ -150,7 +164,8 @@ def recommend_menu(input_price, input_size, input_dessert):
                 # Priceを更新
                 food["price"] = rounded_price
                 print(
-                    f"名前: {food['name']} の新しい価格: {rounded_price}(update_category_bowl_prices)")
+                    f"名前: {food['name']} の新しい価格: {rounded_price}(update_category_bowl_prices)"
+                )
 
     def get_foods_by_ids(food_ids):
         """
@@ -188,7 +203,7 @@ def recommend_menu(input_price, input_size, input_dessert):
                 "rate_normal": food.rate_normal,
                 "rate_bad": food.rate_bad,
                 "sum_rate": food.rate_good + food.rate_normal + food.rate_bad,
-                "image_url": food.image_url
+                "image_url": food.image_url,
             }
             # 辞書形式でリストに追加
             food_list.append(food_data)
@@ -241,7 +256,7 @@ def recommend_menu(input_price, input_size, input_dessert):
     # input_size = 0  # 量(0=小,1=中,2=大)
     # input_dessert = True  # デザートの有無(Ture = あり, false = なし)
     j = 0  # forとかを回すようの変数
-    deside_food_data = [-1]*20  # 何を食べるか、food_idを格納
+    deside_food_data = [-1] * 20  # 何を食べるか、food_idを格納
     dessert_num = 0  # デザートの総数
     main_dish_num = 0  # メインディッシュ（主菜・麺・丼/カレー）カテゴリーの総数
     sub_dish_num = 0  # 副菜カテゴリーの総数
@@ -261,15 +276,15 @@ def recommend_menu(input_price, input_size, input_dessert):
     input_dessert = True
 
     # デザートが最高額の時のみ選択できるようにする
-    if (input_price != 750):
+    if input_price != 750:
         input_dessert = False
 
     # デザートを追加
-    if (input_dessert == True):
+    if input_dessert == True:
         # デザートの個数を調べる
         for i in range(len(all_foods_array)):
-            if (all_foods_array[i]["category"] == "dessert"):
-                if (all_foods_array[i]["sum_rate"] >= 50):
+            if all_foods_array[i]["category"] == "dessert":
+                if all_foods_array[i]["sum_rate"] >= 50:
                     dessert_num += 1
                 dessert_num += 1
         print("dessert_num:", dessert_num)
@@ -277,24 +292,25 @@ def recommend_menu(input_price, input_size, input_dessert):
         # デザート追加処理
         if dessert_num > 0:
             j = 0
-            dessert_list = [0]*dessert_num
+            dessert_list = [0] * dessert_num
             for i in range(len(all_foods_array)):
-                if (all_foods_array[i]["category"] == "dessert"):
-                    if (all_foods_array[i]["sum_rate"] >= 50):
+                if all_foods_array[i]["category"] == "dessert":
+                    if all_foods_array[i]["sum_rate"] >= 50:
                         dessert_list[j] = all_foods_array[i]["food_id"]
                         j += 1
                     dessert_list[j] = all_foods_array[i]["food_id"]
                     j += 1
 
-            deside_food_data[serect_food_num] = dessert_list[random.randint(
-                0, len(dessert_list)-1)]
+            deside_food_data[serect_food_num] = dessert_list[
+                random.randint(0, len(dessert_list) - 1)
+            ]
             sum_money += get_price_by_food_id(
-                all_foods_array, deside_food_data[serect_food_num])
+                all_foods_array, deside_food_data[serect_food_num]
+            )
             print("合計金額：", sum_money)
             serect_food_num += 1
 
-        get_food_details_by_id(
-            all_foods_array, deside_food_data[serect_food_num-1])
+        get_food_details_by_id(all_foods_array, deside_food_data[serect_food_num - 1])
         print("選択メニュー数：", serect_food_num)
 
     # 記録（仮）
@@ -320,16 +336,10 @@ def recommend_menu(input_price, input_size, input_dessert):
         "rate_good": 9,
         "rate_normal": 1,
         "rate_bad": 3,
-        "image_url": "画像ファイルのURL"
+        "image_url": "画像ファイルのURL",
     }
 
-    recent_list = [
-        {
-            "date": "2024-09-10",
-            "meal_id": 1,
-            "foods": [food_item]
-        }
-    ]
+    recent_list = [{"date": "2024-09-10", "meal_id": 1, "foods": [food_item]}]
 
     # 主食の選択（主菜・麺・丼/カレー）＋記録参照
     # (本番では下のコメントアウトを消し、上"記録（仮）"を消すこと)
@@ -337,15 +347,21 @@ def recommend_menu(input_price, input_size, input_dessert):
 
     for i in recent_list:
         for j in i["foods"]:
-            if (j["category"] == "main_dish"):
+            if j["category"] == "main_dish":
                 recent_main_dish_num += 1
-            elif (j["category"] == "bowl"):
+            elif j["category"] == "bowl":
                 recent_bowl_num += 1
-            elif (j["category"] == "noodle"):
+            elif j["category"] == "noodle":
                 recent_noodle_num += 1
 
-    print("main:", recent_main_dish_num, "bowl:",
-          recent_bowl_num, "noodle:", recent_noodle_num)
+    print(
+        "main:",
+        recent_main_dish_num,
+        "bowl:",
+        recent_bowl_num,
+        "noodle:",
+        recent_noodle_num,
+    )
 
     main_dish = random.randint(0, 4)
     if main_dish == 0:
@@ -355,21 +371,20 @@ def recommend_menu(input_price, input_size, input_dessert):
     elif main_dish == 2:
         main_dish = "noodle"
     else:
-        min_value = min(recent_main_dish_num,
-                        recent_bowl_num, recent_noodle_num)
-        if (min_value == recent_main_dish_num):
+        min_value = min(recent_main_dish_num, recent_bowl_num, recent_noodle_num)
+        if min_value == recent_main_dish_num:
             main_dish = "main_dish"
-        elif (min_value == recent_bowl_num):
+        elif min_value == recent_bowl_num:
             main_dish = "bowl"
         else:
             main_dish = "noodle"
     print(main_dish)
 
     # ライスの選択（主菜のときのみ）
-    if (main_dish == "main_dish"):
-        if (input_size == 0):
+    if main_dish == "main_dish":
+        if input_size == 0:
             i = 2
-        elif (input_size == 1):
+        elif input_size == 1:
             i = 3
         else:
             i = 4
@@ -381,21 +396,23 @@ def recommend_menu(input_price, input_size, input_dessert):
         print("合計金額：", sum_money)
         serect_food_num += 1
 
-        get_food_details_by_id(
-            all_foods_array, deside_food_data[serect_food_num-1])
+        get_food_details_by_id(all_foods_array, deside_food_data[serect_food_num - 1])
         print("選択メニュー数：", serect_food_num)
 
     # ここでサイズを大小させる(丼/カレー全てに適応)
 
-    if (input_size == 2):
+    if input_size == 2:
         update_category_bowl_prices(all_foods_array, 1.147)
-    elif (input_size == 0):
+    elif input_size == 0:
         update_category_bowl_prices(all_foods_array, 0.88888888)
 
     # 選択した主食カテゴリーの個数を調べる
     for i in range(len(all_foods_array)):
-        if (all_foods_array[i]["category"] == main_dish and input_price >= sum_money + all_foods_array[i]["price"]):
-            if (all_foods_array[i]["sum_rate"] >= 50):
+        if (
+            all_foods_array[i]["category"] == main_dish
+            and input_price >= sum_money + all_foods_array[i]["price"]
+        ):
+            if all_foods_array[i]["sum_rate"] >= 50:
                 main_dish_num += 1
             main_dish_num += 1
 
@@ -404,37 +421,42 @@ def recommend_menu(input_price, input_size, input_dessert):
     # メインディッシュの選択
     if main_dish_num > 0:
         j = 0
-        main_dish_list = [0]*main_dish_num
+        main_dish_list = [0] * main_dish_num
         for i in range(len(all_foods_array)):
-            if (all_foods_array[i]["category"] == main_dish and input_price >= sum_money + all_foods_array[i]["price"]):
-                if (all_foods_array[i]["sum_rate"] >= 50):
+            if (
+                all_foods_array[i]["category"] == main_dish
+                and input_price >= sum_money + all_foods_array[i]["price"]
+            ):
+                if all_foods_array[i]["sum_rate"] >= 50:
                     main_dish_list[j] = all_foods_array[i]["food_id"]
                     j += 1
                 main_dish_list[j] = all_foods_array[i]["food_id"]
                 j += 1
 
-        deside_food_data[serect_food_num] = main_dish_list[random.randint(
-            0, len(main_dish_list)-1)]
+        deside_food_data[serect_food_num] = main_dish_list[
+            random.randint(0, len(main_dish_list) - 1)
+        ]
 
         sum_money += get_price_by_food_id(
-            all_foods_array, deside_food_data[serect_food_num])
+            all_foods_array, deside_food_data[serect_food_num]
+        )
         print("合計金額：", sum_money)
         serect_food_num += 1
 
-        get_food_details_by_id(
-            all_foods_array, deside_food_data[serect_food_num-1])
+        get_food_details_by_id(all_foods_array, deside_food_data[serect_food_num - 1])
         print("選択メニュー数：", serect_food_num)
 
     # 副菜の決定（お金が無くなるまで）
-    while (input_price >= sum_money):
+    while input_price >= sum_money:
         deside_food_data, sum_money, serect_food_num, sub_dish_num = select_sub_dish(
-            all_foods_array, deside_food_data, sum_money, serect_food_num, input_price)
-        if (sub_dish_num == 0):
+            all_foods_array, deside_food_data, sum_money, serect_food_num, input_price
+        )
+        if sub_dish_num == 0:
             break
 
     print(sum_money)
     print(deside_food_data)
-    deside_food_id = [0]*serect_food_num
+    deside_food_id = [0] * serect_food_num
     for i in range(serect_food_num):
         deside_food_id[i] = deside_food_data[i]
 
@@ -448,6 +470,7 @@ def recommend_menu(input_price, input_size, input_dessert):
     # 選んだメニューＩＤ（複数）を出力(リストで)
     return serect_food_list, toatal_food_data
 
+
 # Flaskのルート
 
 
@@ -457,7 +480,7 @@ def index():
         # フォームから入力された値を取得
         input_price = int(request.form["input_price"])
         input_size = int(request.form["input_size"])
-        input_dessert = 'input_dessert' in request.form  # チェックされているかを確認
+        input_dessert = "input_dessert" in request.form  # チェックされているかを確認
     list = recommend_menu(input_price, input_size, input_dessert)
 
     return render_template("index.html", list)
@@ -469,9 +492,9 @@ if __name__ == "__main__":
     # 例
     # list = recommend_menu(550, 2, True)  # listはfood_idを格納しているリスト
     # print(list)
-    '''
+    """
     serect_food_list = get_foods_by_ids(list)
     print(serect_food_list)  # 渡すもの１（個別データ）
     toatal_food_data = get_food_totals(serect_food_list)
     print(toatal_food_data)  # 渡すもの２（合計データ）
-    '''
+    """
