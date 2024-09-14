@@ -1,7 +1,8 @@
-from app.models import Foods, Users, MealDetails, Meals
-from config import session
-from app.utils import format_datetime
 import datetime
+
+from app.models import Foods, MealDetails, Meals, Users
+from app.utils import format_datetime
+from config import session
 
 
 # すべての食べ物の情報を取得する関数
@@ -17,7 +18,7 @@ def get_food_by_id(food_id):
 
 
 # 指定したユーザの直近5日間(今日も含める)の食事を取得する関数
-def get_history_by_user_id(user_id, is_recent = False):
+def get_history_by_user_id(user_id, is_recent=False):
     # ユーザが見つからない場合は空の値を返す
     user = session.query(Users).get(user_id)
     if user is None:
@@ -29,21 +30,19 @@ def get_history_by_user_id(user_id, is_recent = False):
     start_day = today - datetime.timedelta(days=4)
 
     # SQLでいうSELECTとJOIN
-    items = session.query(MealDetails, Meals, Foods).join(
-        Meals, MealDetails.meal_id == Meals.meal_id
-    ).join(
-        Foods, MealDetails.food_id == Foods.food_id
+    items = (
+        session.query(MealDetails, Meals, Foods)
+        .join(Meals, MealDetails.meal_id == Meals.meal_id)
+        .join(Foods, MealDetails.food_id == Foods.food_id)
     )
 
     if is_recent:
-        items = items.filter(
-            Meals.date >= start_day, Meals.date <= today
-        )
+        items = items.filter(Meals.date >= start_day, Meals.date <= today)
     items = items.all()
 
     current_date = None
     food_list = []
-    single_food_list = [] # 一回の食事のfood_list
+    single_food_list = []  # 一回の食事のfood_list
 
     for i in items:
         meals = i.Meals
@@ -57,7 +56,13 @@ def get_history_by_user_id(user_id, is_recent = False):
 
         # TODO ここ読みづらい
         if meals.date != current_date:
-            food_list.append({"date": format_datetime(current_date), "meal_id": meals.meal_id, "foods": single_food_list})
+            food_list.append(
+                {
+                    "date": format_datetime(current_date),
+                    "meal_id": meals.meal_id,
+                    "foods": single_food_list,
+                }
+            )
             current_date = meals.date
             single_food_list = []
 
@@ -65,6 +70,12 @@ def get_history_by_user_id(user_id, is_recent = False):
 
         # もしiがitemsの最後なら
         if i == items[-1]:
-            food_list.append({"date": format_datetime(current_date), "meal_id": meals.meal_id, "foods": single_food_list})
+            food_list.append(
+                {
+                    "date": format_datetime(current_date),
+                    "meal_id": meals.meal_id,
+                    "foods": single_food_list,
+                }
+            )
 
     return food_list

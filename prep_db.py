@@ -1,7 +1,8 @@
+from datetime import datetime
+
 import app.models
 from app.models import Foods, MealDetails, Meals, Users
 from config import session
-from datetime import datetime
 
 # テーブルの作成
 app.models.create_table()
@@ -106,11 +107,11 @@ date_list = [
     datetime(2024, 9, 10, 13, 00),
     datetime(2024, 9, 11, 12, 30),
     datetime(2024, 9, 11, 18, 00),
-    datetime(2024, 9, 12, 11, 30)
+    datetime(2024, 9, 12, 11, 30),
 ]
 
 for i in range(5):
-    meal = Meals(meal_id=i+1, user_id=1, date=date_list[i])
+    meal = Meals(meal_id=i + 1, user_id=1, date=date_list[i])
     meal_in_table = session.query(Meals).filter(Meals.meal_id == meal.meal_id).first()
 
     if not meal_in_table:
@@ -136,7 +137,7 @@ food_id_list = [
     # チキン甘辛ステーキ, 大学芋, 味噌汁, ライス (大)
     [814279, 814817, 814666, 814701],
     # カレーライス (中), 蒸し鶏サラダ
-    [819272, 814490]
+    [819272, 814490],
 ]
 
 for i in range(5):
@@ -144,7 +145,14 @@ for i in range(5):
         meal_id = i + 1
 
         meal_details = MealDetails(meal_id=meal_id, food_id=food_id)
-        meal_details_in_table = session.query(MealDetails).filter(MealDetails.meal_id == meal_details.meal_id, MealDetails.food_id == meal_details.food_id).first()
+        meal_details_in_table = (
+            session.query(MealDetails)
+            .filter(
+                MealDetails.meal_id == meal_details.meal_id,
+                MealDetails.food_id == meal_details.food_id,
+            )
+            .first()
+        )
 
         if not meal_details_in_table:
             print(f"Adding meal_id {meal_details.meal_id}...")

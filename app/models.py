@@ -29,7 +29,9 @@ class Meals(base):
 class MealDetails(base):
     __tablename__ = "meal_details"
 
-    meal_detail_id = Column("meal_detail_id", Integer, primary_key=True, autoincrement=True)
+    meal_detail_id = Column(
+        "meal_detail_id", Integer, primary_key=True, autoincrement=True
+    )
     meal_id = Column("meal_id", Integer)
     food_id = Column("food_id", Integer)
 
