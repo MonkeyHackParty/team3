@@ -15,29 +15,51 @@ def get_food_by_id(food_id):
     return food
 
 
-# 指定したユーザの最近食べた食事を取得する関数
-def get_recent_meal(user_id):
+# 指定したユーザの直近5日間の食事を取得する関数
+def get_recent_history_by_user_id(user_id):
     user = session.query(Users).get(user_id)
     # ユーザが見つからない場合は空の値を返す
     if user is None:
         return None
 
     # SQLで日付を指定するための変数を用意
-    # monday: 今週の月曜日の日付 (YYYY-MM-DD)
-    # friday: 今週の金曜日の日付 (YYYY-MM-DD)
+    # start_day: 4日前の日付
     today = datetime.date.today()
-    day_of_week = today.weekday()
-
-    monday = today - datetime.timedelta(days=day_of_week)
-    friday = monday + datetime.timedelta(days=4)
+    start_day = today - datetime.timedelta(days=4)
 
     # SQLでいうSELECTとJOIN
-    items = session.query(MealDetails, Meals).filter(
-        MealDetails.meal_id == Meals.meal_id
+    items = session.query(MealDetails, Meals, Foods).join(
+        Meals, MealDetails.meal_id == Meals.meal_id
+    ).join(
+        Foods, MealDetails.food_id == Foods.food_id
     ).filter(
-        Meals.date >= monday, Meals.date <= friday
+        Meals.date >= start_day, Meals.date <= today
     ).all()
 
-    # TODO itemsを整形する
+    current_date = None
+    food_list = []
+    single_food_list = [] # 一回の食事のfood_list
 
-    return items
+    for i in items:
+        meals = i.Meals
+        meal_details = i.MealDetails
+        foods = i.Foods
+
+        if current_date == None:
+            current_date = meals.date
+
+        # print(meals.date, meal_details.food_id, foods.name)
+
+        # TODO ここ読みづらい
+        if meals.date != current_date:
+            food_list.append({"date": current_date, "meal_id": meals.meal_id, "foods": single_food_list})
+            current_date = meals.date
+            single_food_list = []
+
+        single_food_list.append(foods)
+
+        # もしiがitemsの最後なら
+        if i == items[-1]:
+            food_list.append({"date": meals.date, "meal_id": meals.meal_id, "foods": single_food_list})
+
+    return food_list
