@@ -358,4 +358,5 @@ def recommend_menu(input_price, input_size, input_dessert):
 
 # 例
 list = recommend_menu(550, 2, True)
+print("food_id=")
 print(list)
