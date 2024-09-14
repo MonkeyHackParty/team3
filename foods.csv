@@ -1,0 +1,36 @@
+food_id,name,name_english,category,price,energy,protein,fat,carbohydrates,salt,calcium,vegetable,iron,vitamin_a,vitamin_b1,vitamin_b2,vitamin_c,place_of_origin,allergic_substance,rate_good,rate_normal,rate_bad,image
+814279,チキン甘辛ステーキ,Grilled fried chicken,main_dish,374,516,29.2,22.5,46.1,3.4,39,33,1.2,66,0.13,0.33,21,鶏肉 (中国),egg wheat chicken soybean sesame seafood,66,4,7,https://west2-univ.jp/menu_img/png_sp/814279.png
+814012,ササミチーズタルタルソース,Fried chicken cutlet and cheese with tartarsauce,main_dish,286,449,14.4,32.7,25.6,1.9,88,33,0.6,36,0.07,0.10,15,鶏肉 (国産) チーズ (ニュージーランド、その他),egg wheat milk chicken soybean,124,9,33,https://west2-univ.jp/menu_img/png_sp/814012.png
+814129,ハンバーグサルサソース,Hamburg steak with salsa sauce,main_dish,286,230,15.3,11.2,16.2,1.7,50,56,1.4,37,0.15,0.14,23,鶏肉 (国産、タイ) 玉葱 (中国),wheat milk beef chicken soybean,1,2,2,https://west2-univ.jp/menu_img/png_sp/814129.png
+814261,豚もやし炒め,Stir fried pork and vegetables,main_dish,286,302,14.2,20.2,19.3,1.7,69,195,1.4,10,0.36,0.19,21,もやし (国産) 玉葱 (中国) 豚肉 (メキシコ),wheat pork soybean apple sesame,5,2,0,https://west2-univ.jp/menu_img/png_sp/814261.png
+814308,鯖塩焼き,Grilled mackerel,main_dish,242,268,15.9,22.7,0.0,0.6,7,0,0.9,42,0.13,0.33,1,鯖 (ノルウェー),mackerel,4,0,0,https://west2-univ.jp/menu_img/png_sp/814308.png
+814490,蒸し鶏サラダ,Steamed chicken and vegetables,sub_dish,121,47,4.8,0.7,7.0,0.2,19,60,0.3,4,0.06,0.04,18,キャベツ (国産) 鶏肉 (中国),egg wheat chicken soybean,1,1,0,https://west2-univ.jp/menu_img/png_sp/814490.png
+814408,春巻き,Fried pork eggroll,sub_dish,121,305,3.9,23.1,20.7,1.0,16,13,0.4,11,0.04,0.03,2,小麦粉 (国産) 竹の子 (中国、ベトナム、その他),wheat shrimp pork chicken soybean sesame,5,1,0,https://west2-univ.jp/menu_img/png_sp/814408.png
+814447,オクラ巣ごもり玉子,Okra and half boiled egg with soy sauce,sub_dish,99,94,7.8,6.4,3.4,0.7,60,33,1.4,108,0.06,0.25,2,鶏卵 (国産) オクラ (インドネシア),egg wheat mackerel soybean,646,25,18,https://west2-univ.jp/menu_img/png_sp/814447.png
+814583,ささみ枝豆ひじきサラダ,Hijiki salad with steamed chicken carrot and edamame,sub_dish,99,77,5.8,3.1,7.9,0.6,38,37,0.5,125,0.08,0.05,5,ひじき (中国、その他) 鶏肉 (中国) 枝豆 (中国),egg wheat chicken soybean seafood,0,0,0,https://west2-univ.jp/menu_img/png_sp/814583.png
+814411,ねぎだくもやしナムル,Boiled bean sprouts seaweed and leek with salt based sauce,sub_dish,99,39,1.5,1.8,5.0,0.7,32,57,0.3,16,0.03,0.03,7,もやし (国産) ワカメ (中国),sesame,2,0,0,https://west2-univ.jp/menu_img/png_sp/814411.png
+814453,だし巻き,Omlet with japanese soup,sub_dish,77,98,6.2,6.1,3.5,1.0,25,0,0.8,111,0.04,0.04,0,鶏卵 (国産、その他),egg wheat soybean,60,33,12,https://west2-univ.jp/menu_img/png_sp/814453.png
+814577,千切り煮,Simmered dried radish strips in Japanese soup,sub_dish,77,28,1.3,0.8,4.0,0.6,29,36,0.3,39,0.01,0.01,0,切干大根 (中国、その他) 人参 (中国、国産、その他),wheat milk soybean seafood,2,0,0,https://west2-univ.jp/menu_img/png_sp/814577.png
+814456,温泉玉子,Half boiled egg with soy sauce,sub_dish,55,83,7.0,6.4,0.7,0.5,30,0,1.2,88,0.03,0.22,0,鶏卵 (国産),egg wheat mackerel soybean,40,9,0,https://west2-univ.jp/menu_img/png_sp/814456.png
+814455,冷奴,Tofu with ginger leek,sub_dish,55,47,4.4,2.9,2.0,0.1,26,1,1.0,1,0.09,0.03,8,豆腐 (大豆：カナダ、アメリカ),soybean,21,10,0,https://west2-univ.jp/menu_img/png_sp/814455.png
+814457,納豆,Fermented soybeans,sub_dish,55,63,5.5,3.2,4.3,0.4,28,0,1.0,0,0.02,0.17,0,大豆 (国産),wheat soybean,8,2,0,https://west2-univ.jp/menu_img/png_sp/814457.png
+814468,夏のさっぱり豚汁,Japanese soup with pork vegetables and deepfried tofu,sub_dish,121,75,5.4,4.2,5.5,1.8,37,65,0.4,109,0.16,0.07,7,豚肉 (メキシコ) 大根 (国産) 人参 (国産、中国),wheat mackerel pork soybean,220,1,9,https://west2-univ.jp/menu_img/png_sp/814468.png
+814666,味噌汁,Miso soup,sub_dish,44,38,2.1,1.9,2.8,1.2,28,0,0.5,1,0.00,0.01,0,わかめ (中国) 油揚げ (加工地：国産),soybean,8,3,1,https://west2-univ.jp/menu_img/png_sp/814666.png
+819512,冷やし鶏天タルタルうどん,Cold whitewheat noodles with fried chicken in Japanese soup and tartarsauce,noodle,396,547,18.1,15.4,83.8,5.0,31,5,1.0,36,0.15,0.13,5,うどん (国産) 鶏肉 (中国),egg wheat milk mackerel chicken soybean,1,0,0,https://west2-univ.jp/menu_img/png_sp/819512.png
+819513,冷やし鶏天タルタルそば,Cold buckwheat noodles with fried chicken in Japanese soup and tartarsauce,noodle,396,522,23.3,15.8,71.3,4.6,36,5,2.3,36,0.25,0.16,5,そば (国産) 鶏肉 (中国),egg wheat milk buckwheat mackerel chicken soybean,0,0,0,https://west2-univ.jp/menu_img/png_sp/819513.png
+819354,冷やしうどん,Cold whitewheat noodles in Japanese soup,noodle,352,341,8.7,1.4,73.8,3.9,31,5,0.8,29,0.06,0.08,4,うどん (国産),wheat mackerel soybean,137,1,1,https://west2-univ.jp/menu_img/png_sp/819354.png
+819355,冷やしそば,Cold buckwheat noodles in Japanese soup,noodle,352,331,14.8,2.1,63.9,3.1,31,5,1.7,29,0.11,0.09,4,そば (国産),egg wheat buckwheat mackerel soybean,118,1,1,https://west2-univ.jp/menu_img/png_sp/819355.png
+819429,胡麻チゲ冷麺,Cold noodle with Korean stew and white sesame seeds and steam chicken,noodle,506,525,25.9,12.7,78.6,6.5,79,10,2.5,99,0.20,0.33,2,中華麺 (国産) 鶏肉 (中国) 鶏卵 (国産),egg wheat chicken soybean sesame seafood,6,1,0,https://west2-univ.jp/menu_img/png_sp/819429.png
+819178,焼き鳥丼 (中),Bowl of rice with stir fried chicken and boiled egg topped with Japanese sauce,bowl,495,676,24.8,13.7,116.3,3.5,24,5,1.0,61,0.17,0.30,8,米 (国産) 鶏肉 (中国) 鶏卵 (国内加工),egg wheat milk chicken soybean apple gelatin,0,0,1,https://west2-univ.jp/menu_img/png_sp/819178.png
+819934,塩だれカツ丼 (中),Bowl of rice with fried pork cutlet with salt based sauce,bowl,440,726,18.2,24.9,110.4,2.4,34,30,0.8,27,0.38,0.11,14,米 (国産) 豚肉 (チリ、メキシコ、その他),egg wheat milk pork soybean sesame,1,0,0,https://west2-univ.jp/menu_img/png_sp/819934.png
+819253,ロースカツカレー (中),Curry rice with fried pork cutlet,bowl,440,847,21.7,30.3,123.9,4.4,43,12,1.6,56,0.40,0.12,1,米 (国産) 豚肉 (チリ、メキシコ、その他),egg wheat milk beef pork chicken soybean,15,8,1,https://west2-univ.jp/menu_img/png_sp/819253.png
+819272,カレーライス (中),Curry rice,bowl,319,566,10.5,10.6,109.9,3.8,37,12,1.3,53,0.09,0.06,1,米 (国産) じゃが芋 (国産) 人参 (国産),wheat beef pork chicken soybean,18,25,4,https://west2-univ.jp/menu_img/png_sp/819272.png
+814845,生チョコケーキ,Raw chocolate cake,dessert,176,98,1.5,5.9,9.6,0.0,16,0,0.3,32,0.02,0.05,0,ホイップクリーム (国産),egg wheat milk soybean,1,0,1,https://west2-univ.jp/menu_img/png_sp/814845.png
+814808,フルーツヨーグルト,Yogurt with peach pineapple orange,dessert,132,78,2.7,2.2,12.9,0.1,89,0,0.1,29,0.04,0.10,20,生乳 (国産) みかん (中国) 黄桃 (中国),milk peach,49,17,11,https://west2-univ.jp/menu_img/png_sp/814808.png
+814897,ブルーベリーのタルト,Blue berry tart,dessert,88,87,0.6,3.8,13.1,0.0,63,0,4.7,0,0.01,0.00,37,米粉 (国産) 豆乳 (国産),soybean,1,0,0,https://west2-univ.jp/menu_img/png_sp/814897.png
+814817,大学芋,Fried sweetpotato with sugar,dessert,110,157,0.6,3.2,31.7,0.0,15,0,0.3,1,0.05,0.03,10,さつま芋 (国産),,139,19,8,https://west2-univ.jp/menu_img/png_sp/814817.png
+814700,ライス (特大),Boiled rice,rice,209,718,11.5,1.4,170.7,0.0,14,0,0.5,0,0.09,0.05,0,米 (国産),,2,0,2,https://west2-univ.jp/menu_img/png_sp/814700.png
+814701,ライス (大),Boiled rice,rice,147,484,7.8,0.9,115.0,0.0,9,0,0.3,0,0.06,0.03,0,米 (国産),,4,0,0,https://west2-univ.jp/menu_img/png_sp/814701.png
+814702,ライス (中),Boiled rice,rice,126,374,6.0,0.7,89.0,0.0,7,0,0.2,0,0.05,0.02,0,米 (国産),,9,1,3,https://west2-univ.jp/menu_img/png_sp/814702.png
+814703,ライス (小),Boiled rice,rice,105,265,4.3,0.5,63.1,0.0,5,0,0.2,0,0.03,0.02,0,米 (国産),,2,0,0,https://west2-univ.jp/menu_img/png_sp/814703.png
+814704,ライス (ミニ),Boiled rice,rice,84,156,2.5,0.3,37.1,0.0,3,0,0.1,0,0.02,0.01,0,米 (国産),,5,2,2,https://west2-univ.jp/menu_img/png_sp/814704.png
