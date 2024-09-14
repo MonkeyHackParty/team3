@@ -351,11 +351,11 @@ def recommend_menu(input_price, input_size, input_dessert):
         deside_food_id[i] = deside_food_data[i]
 
     print(deside_food_id)
-    # オーバーフロー防止のためdeside_food_dataは長めに宣言しています。
-    # 選んだメニューＩＤ（複数）を出力（やりかたが分からん...）
 
+    # 選んだメニューＩＤ（複数）を出力(リストで)
     return deside_food_id
 
 
+# 例
 list = recommend_menu(550, 2, True)
 print(list)
