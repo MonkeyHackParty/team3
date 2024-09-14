@@ -9,6 +9,7 @@ def index():
     foods = get_all_food()
     return render_template("index.html", foods=foods)
 
+
 @app.route("/daily")
 def daily():
     foods = get_all_food()
