@@ -18,13 +18,9 @@ def get_food_by_id(food_id):
 
 # 指定したmeal_idの食べ物の情報(複数)を取得する関数
 def get_food_by_meal_id(meal_id):
-    items = session.query(MealDetails, Foods).join(
-        Foods, MealDetails.food_id == Foods.food_id
+    food_list = session.query(Foods).join(
+        MealDetails, MealDetails.food_id == Foods.food_id
     ).filter(MealDetails.meal_id == meal_id).all()
-
-    food_list = []
-    for i in items:
-        food_list.append(i.Foods)
 
     return food_list
 
