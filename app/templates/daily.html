@@ -14,7 +14,7 @@
         .container {
             display: flex;
             justify-content: space-around;
-            flex-wrap: wrap;
+            flex-wrap: wrap
             gap: 20px;
             padding: 20px;
         }
@@ -29,6 +29,14 @@
             padding: 5px 120px;
             width: 70%;
             object-fit: cover;
+        }
+        .date {
+            padding: 5px 10px;
+            background-color: #f4f803;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
         }
         .image-name {
             padding: 5px 10px;
@@ -67,18 +75,44 @@
     <header class="header-nav">
         <h1>学メシアドバイザー</h1>
     </header>
-//    {% for food in foods %}
-//    <div>{{food.id}} {{food.price}} {{food.name}}</div>
-//    {% endfor %}
+<!--
+    {% for food in foods %}
+    <div>{{food.id}} {{food.price}} {{food.name}}</div>
+    {% endfor %}
+-->
 
+<!--
     {% for i in history %}
 
     date {{i.date}}
     <br>
-    meal_id {{i.meal_id}}
-    <br>
-    {% endfor %}
+        meal_id {{i.meal_id}}
+    </br>
+    <ul>
+        {% for food in i.foods %}
+        <li>{{food.name}}</li>
+        {% endfor %}
+    </ul>
+-->
+
+
 <!--
+    {% for i in history %}
+        {% for food in i.foods %}
+        <div class="container">
+            <div class="box">
+                <img src={{food.image_url}} alt="Image">
+                <div class="date">ID:{{i.meal_id}}   [ {{i.date}} ]</div>
+                <div class="image-name">{{food.name}}</div>
+                <div class="price">{{food.price}} (円)</div>
+                <div class="energy">{{food.energy}} (kcal)</div>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% endfor %}
+-->
+
     {% for food in foods %}
     <div class="container">
         <div class="box">
@@ -89,6 +123,5 @@
         </div>
     </div>
     {% endfor %}
--->
 </body>
 </html>
