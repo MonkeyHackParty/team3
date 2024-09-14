@@ -11,43 +11,36 @@
     <a href="/login">ログイン</a>
   </aside>
   <article>
-    <form action="recommended.py" method="post">
+    <div class="container">
+     <div class="item">   
+    <form action="recommend.py" method="post">
         お値段はいくらぐらいですか？(値段は目安です)
         <input type="radio" name="input_price" value="550"> 550円
         <input type="radio" name="input_price" value="650"> 650円
         <input type="radio" name="input_price" value="750"> 750円
     </form>
-    <form action="recommended.py" method="post">
+    </div>
+    <div class="item"> 
+    <form action="recommend.py" method="post">
         量はどのくらいですか？
         <input type="radio" name="input_size" value="0"> 小
         <input type="radio" name="input_size" value="1"> 中
         <input type="radio" name="input_size" value="2"> 大
     </form>
-    <form action="recommended.py" method="post">
+    </div>
+    <div class="item"> 
+    <form action="recommend.py" method="post">
         デザートはどうしますか？(お値段が750円のときのみアリを選択できます)
         <input type="radio" name="input_dessert" value="Ture"> アリ
         <input type="radio" name="input_dessert" value="False"> ナシ
     </form>
-    <main>
-    {% for food in foods %}    
-   <div class="container">
-      <div class="item">
-      <img src={{food.image_url}} alt="Image">
-      <p>{{ food.name }}</p>
-      </div>
-   </div>
-     <ul>
-     <li>エネルギー:{{ food.energy }}</li> 
-     <li>タンパク質:{{ food.energy }}</li>
-     <li>脂質: {{ food.energy }}</li>
-     <li>炭水化物:{{ food.energy }}</li>
-     <li>ナトリウム:{{ food.energy }}</li>
-     </ul>
-     <div>
-     <P>合計金額:{{ food.price }}円</P>
-     </div>
-     {% endfor %}
-    </main>
+    </div>
+    <div class="item"> 
+    <form action="recommend.py" method="post">
+        <input type="submit" value="送信する">
+    </form>
+    </div>
+    </div>
      {% for i in history %}
     <section>
      <table border="1">

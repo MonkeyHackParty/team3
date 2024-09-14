@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<header>
+    <h1>学メシアドバイザー</h1>
+  </header>
+  <aside>
+    <a href="/signup">新規登録</a>
+    <a href="/login">ログイン</a>
+  </aside>
+  <article>
+    <main>
+    {% for food in foods %}    
+   <div class="container2">
+      <div class="item">
+      <img src={{image_url}} alt="Image">
+      <p>{{ name }}</p>
+      </div>
+   </div>
+     <ul>
+     <li>エネルギー:{{ energy }}</li> 
+     <li>タンパク質:{{ protein }}</li>
+     <li>脂質: {{ fat }}</li>
+     <li>炭水化物:{{ carbohydrates }}</li>
+     <li>ナトリウム:{{ salt }}</li>
+     </ul>
+     <div>
+     <P>合計金額:{{ total_price }}円</P>
+     </div>
+     {% endfor %}
+    </main>
+     {% for i in history %}
+    <section>
+     <table border="1">
+        <tr>
+            <th>
+               {{ i.date }}
+            </th>
+        </tr>
+        <tr>
+            <td>
+            <img src={{food.image_url}} alt="Image">
+            </td>
+        </tr>
+     </table>
+    </section>
+    {% endfor %}
+   <div class="container1">
+    <div class="item1"><a href="">左</a></div>
+    <div  class="item1"><a href="">右</a></div>
+   </div>
+  </article>
+{% endblock %}

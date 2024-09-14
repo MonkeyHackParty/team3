@@ -21,7 +21,17 @@ h1 {
 div p {
    text-align: right;
 }
+
+.item {
+   text-align: center;
+}
+
+
 .container {
+   display: column;
+   justify-content: flex-end;
+}
+.container2 {
    display: flex;
    justify-content: space-around;
 }
