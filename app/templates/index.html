@@ -32,24 +32,16 @@
     {% for food in foods %}    
    <div class="container">
       <div class="item">
-      <p> {{ food.id }} </p>
-      <p>{{ food.name }}</p>
-      </div>
-      <div class="item">
-      <p> {{ food.id }} </p>
-      <p>{{ food.name }}</p>
-      </div>
-      <div class="item">
-      <p>{{ food.id }}</p>
+      <img src={{food.image_url}} alt="Image">
       <p>{{ food.name }}</p>
       </div>
    </div>
      <ul>
-     <li>エネルギー:{{ food.name }}</li> 
-     <li>タンパク質:{{ food.name }}</li>
-     <li>脂質: {{ food.name }}</li>
-     <li>炭水化物:{{ food.name }}</li>
-     <li>ナトリウム:{{ food.name }}</li>
+     <li>エネルギー:{{ food.energy }}</li> 
+     <li>タンパク質:{{ food.energy }}</li>
+     <li>脂質: {{ food.energy }}</li>
+     <li>炭水化物:{{ food.energy }}</li>
+     <li>ナトリウム:{{ food.energy }}</li>
      </ul>
      <div>
      <P>合計金額:{{ food.price }}円</P>
@@ -66,7 +58,7 @@
         </tr>
         <tr>
             <td>
-                data
+            <img src={{food.image_url}} alt="Image">
             </td>
         </tr>
      </table>
