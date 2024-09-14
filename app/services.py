@@ -16,6 +16,17 @@ def get_food_by_id(food_id):
     food = session.query(Foods).get(food_id)
     return food
 
+# 指定したmeal_idの食べ物の情報(複数)を取得する関数
+def get_food_by_meal_id(meal_id):
+    items = session.query(MealDetails, Foods).join(
+        Foods, MealDetails.food_id == Foods.food_id
+    ).filter(MealDetails.meal_id == meal_id).all()
+
+    food_list = []
+    for i in items:
+        food_list.append(i.Foods)
+
+    return food_list
 
 # 指定したユーザの直近5日間(今日も含める)の食事を取得する関数
 def get_history_by_user_id(user_id, is_recent=False):
