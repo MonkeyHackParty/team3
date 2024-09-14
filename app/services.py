@@ -15,10 +15,10 @@ def get_food_by_id(food_id):
     return food
 
 
-# 指定したユーザの直近5日間の食事を取得する関数
-def get_recent_history_by_user_id(user_id):
-    user = session.query(Users).get(user_id)
+# 指定したユーザの直近5日間(今日も含める)の食事を取得する関数
+def get_history_by_user_id(user_id, is_recent = False):
     # ユーザが見つからない場合は空の値を返す
+    user = session.query(Users).get(user_id)
     if user is None:
         return None
 
@@ -32,9 +32,13 @@ def get_recent_history_by_user_id(user_id):
         Meals, MealDetails.meal_id == Meals.meal_id
     ).join(
         Foods, MealDetails.food_id == Foods.food_id
-    ).filter(
-        Meals.date >= start_day, Meals.date <= today
-    ).all()
+    )
+
+    if is_recent:
+        items = items.filter(
+            Meals.date >= start_day, Meals.date <= today
+        )
+    items = items.all()
 
     current_date = None
     food_list = []
