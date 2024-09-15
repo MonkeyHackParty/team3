@@ -10,7 +10,7 @@ def index():
 
 @app.route("/daily")    
 def daily():
-    food_list = get_food_by_meal_id(1)
+    foods = get_food_by_meal_id(1)
     return render_template("daily.html", foods=foods)
 
 #    history = get_history_by_user_id(1, is_recent=False)
