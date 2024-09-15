@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Image Boxes with Names and Descriptions</title>
+    <title>学メシアドバイザー</title>
     <style>
+        .header-nav {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            background-color: lightblue;
+        }
         .container {
             display: flex;
-            flex-wrap: wrap;
+            justify-content: space-around;
+            flex-wrap: wrap
             gap: 20px;
             padding: 20px;
         }
         .box {
-            width: 500px;
+            width: 800px;
             border: 1px solid #ccc;
             border-radius: 5px;
             overflow: hidden;
@@ -20,16 +27,39 @@
         }
         .box img {
             padding: 5px 120px;
-            width: 50%;
-            height: 200px;
+            width: 70%;
             object-fit: cover;
+        }
+        .date {
+            padding: 5px 10px;
+            background-color: #f4f803;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
         }
         .image-name {
             padding: 5px 10px;
             background-color: #e9e9e9;
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
+            text-align: center;
+        }
+        .price {
+            padding: 5px 10px;
+            background-color: #aff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+        .energy {
+            padding: 10px;
+            background-color: #faa;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
             text-align: center;
         }
         .description {
@@ -42,18 +72,37 @@
     </style>
 </head>
 <body>
-//    {% for food in foods %}
-//    <div>{{food.id}} {{food.price}} {{food.name}}</div>
-//    {% endfor %}
+    <header class="header-nav">
+        <h1>学メシアドバイザー</h1>
+    </header>
+
+<!--
+    {% for i in history %}
+        {% for food in i.foods %}
+        <div class="container">
+            <div class="box">
+                <img src={{food.image_url}} alt="Image">
+                <div class="date">ID:{{i.meal_id}}   [ {{i.date}} ]</div>
+                <div class="image-name">{{food.name}}</div>
+                <div class="price">{{food.price}} (円)</div>
+                <div class="energy">{{food.energy}} (kcal)</div>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% endfor %}
+-->
 
     {% for food in foods %}
     <div class="container">
         <div class="box">
-            <img src="https://west2-univ.jp/menu_img/png_sp/819178.png" alt="Burger">
+            <img src={{food.image_url}} alt="Image">
             <div class="image-name">{{food.name}}</div>
-            <div class="price">{{food.price}}</div>
+            <div class="price">{{food.price}} (円)</div>
+            <div class="energy">{{food.energy}} (kcal)</div>
         </div>
     </div>
     {% endfor %}
+
 </body>
 </html>
